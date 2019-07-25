@@ -8,7 +8,7 @@ namespace Course_Project.Models
 {
     class InvestmentMethod
     {
-        private static double NPV(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
+        private double NPV(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
         {
             double sumNPV = 0;
             for (int i = 0; i <= dateValue - 1; i++)
@@ -17,11 +17,11 @@ namespace Course_Project.Models
             }
             return sumNPV - moneyInvest;
         }
-        private static double PI(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
+        private double PI(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
         {
             return NPV(moneyInvest, dateValue, valueArray, rateInvest) / moneyInvest;
         }
-        private static double ARR(double moneyInvest, int dateValue, double[] valueArray)
+        private double ARR(double moneyInvest, int dateValue, double[] valueArray)
         {
             double PN = 0;
             for (int i = 0; i <= dateValue - 1; i++)
@@ -30,7 +30,7 @@ namespace Course_Project.Models
             }
             return ((PN / dateValue) / (0.5 * moneyInvest)) * 100;
         }
-        private static double PP(double moneyInvest, int dateValue, double[] valueArray)
+        private double PP(double moneyInvest, int dateValue, double[] valueArray)
         {
             double sumValue = 0;
             double sumDate = 0;
@@ -42,7 +42,7 @@ namespace Course_Project.Models
             }
             return sumDate;
         }
-        private static double DPP(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
+        private double DPP(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
         {
             double sumValue = 0;
             double sumDate = 0;
@@ -54,32 +54,31 @@ namespace Course_Project.Models
             }
             return sumDate;
         }
-        private static double IRR(double moneyInvest, int dateValue, double[] valueArray)
+        private double IRR(double moneyInvest, int dateValue, double[] valueArray)
         {
             double rate1 = 0.01;
             double rate2 = 0.1;
-
             double fr1 = NPV(moneyInvest, dateValue, valueArray, rate1);
             double fr2 = NPV(moneyInvest, dateValue, valueArray, rate2);
             return rate1 + fr1 / (fr1 - fr2) * (rate2 - rate1) * 100;
         }
-        public static string InvestMethodsАnalytics(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
+        public string InvestMethodsАnalytics(double moneyInvest, int dateValue, double[] valueArray, double rateInvest)
         {
-            string resultNPV = string.Empty;
+            string resultNPV;
             if (NPV(moneyInvest, dateValue, valueArray, rateInvest) >= 0)
                 resultNPV = "\nNPV: Проект следует принять";
             else if (NPV(moneyInvest, dateValue, valueArray, rateInvest) == 0)
                 resultNPV = "\nNPV: Проект не является ни прибыльным ни убыточным";
             else
                 resultNPV = "\nNPV: Проект следует отвергнуть";
-            string resultPI = string.Empty;
-            if (NPV(moneyInvest, dateValue, valueArray, rateInvest) / moneyInvest >= 1)
+            string resultPI;
+            if (PI(moneyInvest, dateValue, valueArray, rateInvest) >= 1)
                 resultPI = "\nPI: Проект следует принять";
-            else if (NPV(moneyInvest, dateValue, valueArray, rateInvest) / moneyInvest == 1)
+            else if (PI(moneyInvest, dateValue, valueArray, rateInvest) == 1)
                 resultPI = "\nPI: Проект не является ни прибыльным ни убыточным";
             else
                 resultPI = "\nPI: Проект следует отвергнуть";
-            string resultIRR = string.Empty;
+            string resultIRR;
             if (NPV(moneyInvest, dateValue, valueArray, rateInvest) == 0)
             {
                 if (IRR(moneyInvest, dateValue, valueArray) > moneyInvest)
@@ -97,7 +96,7 @@ namespace Course_Project.Models
             {
                 resultIRR = "\nIRR: Проект следует отвергнуть";
             }
-            string resultPpDpp = string.Empty;
+            string resultPpDpp;
             if (PP(moneyInvest, dateValue, valueArray) == DPP(moneyInvest, dateValue, valueArray, rateInvest))
             {
                 resultPpDpp = "\nСрок получения " + rateInvest * 100 + "% прибыли в днях: " + PP(moneyInvest, dateValue, valueArray);
@@ -109,9 +108,8 @@ namespace Course_Project.Models
             else
                 resultPpDpp = "\nСрок получения " + rateInvest * 100 + "% прибыли: от " + PP(moneyInvest, dateValue, valueArray) + " до " + DPP(moneyInvest, dateValue, valueArray, rateInvest) + " дней";
 
-            string resultARR = "\nБухгалтерская норма доходности: " + Math.Round(ARR(moneyInvest, dateValue, valueArray)) + "%";
-            string result = resultNPV + resultPI + resultIRR + resultPpDpp + resultARR;
-            return result;
+            string resultARR = "\nБухгалтерская норма доходности: " + Math.Round(ARR(moneyInvest, dateValue, valueArray)) + "%";           
+            return resultNPV + resultPI + resultIRR + resultPpDpp + resultARR;
         }
     }
 }

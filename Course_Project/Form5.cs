@@ -16,8 +16,8 @@ namespace Course_Project
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            Investment investment = new Investment();
-            investment.Pattern(textBox1, textBox2, dateTimePicker1 , this);
+            MoneyOperation moneyOperation = new MoneyOperation();
+            moneyOperation.Investment(textBox1, textBox2, dateTimePicker1 , this);
         }
         private void TextBox1_Click(object sender, EventArgs e)
         {

@@ -113,8 +113,7 @@
     <Compile Include="ProjectDB\ModelsDB\LogPassDB.cs" />
     <Compile Include="ProjectDB\ModelsDB\MoneyCountDB.cs" />
     <Compile Include="DataForUser\InvestmentMethod.cs" />
-    <Compile Include="UsersOperation\Investment.cs" />
-    <Compile Include="UsersOperation\Money.cs" />
+    <Compile Include="UsersOperation\MoneyOperation.cs" />
     <Compile Include="UsersOperation\User.cs" />
     <Compile Include="ProjectDB\DataBase.cs" />
     <Compile Include="UsersOperation\DesignForms.cs" />

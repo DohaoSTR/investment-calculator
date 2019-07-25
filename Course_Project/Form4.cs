@@ -33,7 +33,7 @@ namespace Course_Project
         }                 
         private void Form4_Load(object sender, EventArgs e)
         {
-            Money money = new Money();
+            MoneyOperation money = new MoneyOperation();
             money.CalculatePercentProfit();
             money.RefreshTable();
             money.InvestmentTimeIsUp();
@@ -41,14 +41,14 @@ namespace Course_Project
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            Money money = new Money();
-            money.Withdraw(textBox1);
+            MoneyOperation money = new MoneyOperation();
+            money.WithdrawButton(textBox1);
             InitTables();
 
         }
         private void Button2_Click(object sender, EventArgs e)
         {
-            Money money = new Money();
+            MoneyOperation money = new MoneyOperation();
             money.ChangeTime(textBox2, dateTimePicker1);
             textBox2.Text = "Номер операции";
             dateTimePicker1.Value = DateTime.Now;

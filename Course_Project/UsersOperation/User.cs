@@ -9,7 +9,7 @@ namespace Course_Project.Models_2
     class User
     {
         public static int Id { get; private set; }
-        public static decimal MoneyCount { get; protected set; }
+        public static decimal MoneyCount { get; set; }
         public void Registration(TextBox textBox1, TextBox textBox2, TextBox textBox3, TextBox textBox4, Form2 form2)
         {
             DataBase dataBase = new DataBase();

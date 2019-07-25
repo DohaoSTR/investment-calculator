@@ -94,7 +94,7 @@ namespace Course_Project
         }
         private void Form3_Load(object sender, EventArgs e)
         {
-            Money money = new Money();
+            MoneyOperation money = new MoneyOperation();
             label18.Text = "";
             label19.Text = "";
             timer1.Enabled = true;
@@ -107,7 +107,7 @@ namespace Course_Project
         }
         private void Form3_Activated(object sender, EventArgs e)
         {
-            Money money = new Money();
+            MoneyOperation money = new MoneyOperation();
             label1.Text = "Денежные средства: " + money.RefreshCount() + " рублей.";
             money.UpdateCurrentCourse();
         }

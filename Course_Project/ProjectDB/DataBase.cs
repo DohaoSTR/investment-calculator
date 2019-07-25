@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Linq;
+using System.Windows.Forms;
 using Course_Project.ModelDB;
 
 namespace Course_Project.Models
@@ -14,8 +15,8 @@ namespace Course_Project.Models
         public Table<CompletedDB> CompletedDBs { get; private set; }
         public void ConnectionString()
         {
-            //string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\KursBase.mdf;Integrated Security=True;Connect Timeout=30;User Instance=False;MultipleActiveResultSets=True";
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"C:\Users\muzal\OneDrive\Рабочий стол\Course_Project\Course_Project\KursBase.mdf;Integrated Security=True;User Instance=False;";
+            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\KursBase.mdf;Integrated Security=True;Connect Timeout=30;User Instance=False;MultipleActiveResultSets=True";
+            //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"C:\Users\muzal\OneDrive\Рабочий стол\Course_Project\Course_Project\KursBase.mdf;Integrated Security=True;User Instance=False;";
             Db = new DataContext(connectionString);
 
             MoneyCountDBs = Db.GetTable<MoneyCountDB>();
