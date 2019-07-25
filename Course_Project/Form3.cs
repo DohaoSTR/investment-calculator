@@ -150,122 +150,81 @@ namespace Course_Project
         {
             WindowState = DesignForms.ButtonTurn_Click();
         }
+        private void DataInvest(string nameInvest)
+        {
+            Graph graph = new Graph();
+            NameInvest = nameInvest;
+            graph.TakeData(NameInvest);
+            CurrentCourse = graph.CurrentCourse;
+            ListCourse.AddRange(graph.ListCourse);
+        }
         private void AllInvestButton_Click(object sender, EventArgs e)
         {
             Form5 f5 = new Form5();
-            Graph graph = new Graph();
             switch (((Button)sender).Name)
             {
                 case "button9":
-                    NameInvest = "USD";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("USD");
                     f5.ShowDialog();
                     break;
                 case "button10":
-                    NameInvest = "EUR";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("EUR");
                     f5.ShowDialog();
                     break;
                 case "button11":
-                    NameInvest = "CNY";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("CNY");
                     f5.ShowDialog();
                     break;
                 case "button12":
-                    NameInvest = "INR";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("INR");
                     f5.ShowDialog();
                     break;
                 case "button13":
-                    NameInvest = "BTC";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("BTC");
                     f5.ShowDialog();
                     break;
                 case "button14":
-                    NameInvest = "ETH";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("ETH");
                     f5.ShowDialog();
                     break;
                 case "button15":
-                    NameInvest = "LTC";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("LTC");
                     f5.ShowDialog();
                     break;
                 case "button16":
-                    NameInvest = "DASH";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("DASH");
                     f5.ShowDialog();
                     break;
                 case "button17":
-                    NameInvest = "XAU";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("XAU");
                     f5.ShowDialog();
                     break;
                 case "button18":
-                    NameInvest = "XAG";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("XAG");
                     f5.ShowDialog();
                     break;
                 case "button19":
-                    NameInvest = "XPT";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("XPT");
                     f5.ShowDialog();
                     break;
                 case "button20":
-                    NameInvest = "XPD";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("XPD");
                     f5.ShowDialog();
                     break;
                 case "button21":
-                    NameInvest = "AAPL";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("AAPL");
                     f5.ShowDialog();
                     break;
                 case "button22":
-                    NameInvest = "Tesla";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("Tesla");
                     f5.ShowDialog();
                     break;
                 case "button23":
-                    NameInvest = "Facebook";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("Facebook");
                     f5.ShowDialog();
                     break;
                 case "button24":
-                    NameInvest = "Toyota";
-                    graph.TakeData(NameInvest);
-                    CurrentCourse = graph.CurrentCourse;
-                    ListCourse.AddRange(graph.ListCourse);
+                    DataInvest("Toyota");
                     f5.ShowDialog();
                     break;
             }

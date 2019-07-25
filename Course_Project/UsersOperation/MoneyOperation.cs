@@ -14,34 +14,32 @@ namespace Course_Project.Models_2
 {
     class MoneyOperation
     {
-        private void Withdraw(IQueryable<CurrentDB> query)
+        private void Withdraw(IQueryable<CurrentDB> dataCurrent)
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();           
-            User.MoneyCount += query.First().CurrentMoney;
-            var query2 = from u in dataBase.MoneyCountDBs
+            User.MoneyCount += dataCurrent.First().CurrentMoney;
+            var moneyCount = from u in dataBase.MoneyCountDBs
                          where u.Id_Account == User.Id
                          select u;
-            foreach (MoneyCountDB u in query2)
+            foreach (MoneyCountDB u in moneyCount)
             { u.MoneyCount = User.MoneyCount; }
             CompletedDB completedDB = new CompletedDB
             {
                 Id_Account = User.Id,
-                Id_Operation = query.First().Id_Operation,
-                NameInvest = query.First().NameInvest,
-                ProfitMoney = query.First().CurrentMoney,
-                DateOpenInvest = query.First().DateOpenInvest,
+                Id_Operation = dataCurrent.First().Id_Operation,
+                NameInvest = dataCurrent.First().NameInvest,
+                ProfitMoney = dataCurrent.First().CurrentMoney,
+                DateOpenInvest = dataCurrent.First().DateOpenInvest,
                 DateCloseInvest = DateTime.Now,
-                PercentProfit = query.First().PercentProfit,
-                InitialInvest = query.First().InitialInvest
+                PercentProfit = dataCurrent.First().PercentProfit,
+                InitialInvest = dataCurrent.First().InitialInvest
             };
             dataBase.CompletedDBs.InsertOnSubmit(completedDB);
-            dataBase.Db.SubmitChanges();
             var deleteCurrent = from u in dataBase.CurrentDBs
                                 where u.Id_Account == User.Id
                                 select u;
             dataBase.CurrentDBs.DeleteOnSubmit(deleteCurrent.First());
-            dataBase.Db.SubmitChanges();
             var deleteCurrentCourse = from u in dataBase.СurrentCourseDBs
                                       where u.Id_Account == User.Id
                                       select u;
@@ -52,19 +50,19 @@ namespace Course_Project.Models_2
         {
             DataBase dataBase = new DataBase();          
             dataBase.ConnectionString();
-            var moneyCount = from u in dataBase.MoneyCountDBs
+            var dataMoneyCount = from u in dataBase.MoneyCountDBs
                              where u.Id_Account == User.Id
                              select u;
-            return User.MoneyCount = moneyCount.First().MoneyCount;
+            return User.MoneyCount = dataMoneyCount.First().MoneyCount;
         }
         public void RefreshTable()
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            var query = from u in dataBase.MoneyCountDBs
+            var dataMoneyCount = from u in dataBase.MoneyCountDBs
                         where u.Id_Account == User.Id
                         select u;
-            foreach (MoneyCountDB u in query)
+            foreach (MoneyCountDB u in dataMoneyCount)
             { u.MoneyCount = User.MoneyCount; }
             dataBase.Db.SubmitChanges();
         }
@@ -92,31 +90,31 @@ namespace Course_Project.Models_2
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            var query = from u in dataBase.CurrentDBs
+            var dataCurrent = from u in dataBase.CurrentDBs
                         where u.Id_Account == User.Id
                         select u;
-            var query2 = from u in dataBase.СurrentCourseDBs
-                         where u.Id_Operation == query.First().Id_Operation
+            var dataCurrentCourse = from u in dataBase.СurrentCourseDBs
+                         where u.Id_Operation == dataCurrent.First().Id_Operation
                          select u;
-            if (query.Any() != true || query2.Any() != true)
+            if (dataCurrent.Any() != true || dataCurrentCourse.Any() != true)
                 return;
 
             decimal percentProfit;
-            decimal initialAmountUnit = query.First().InitialInvest / query2.First().InitialCourse;
-            decimal newCurrentMoney = initialAmountUnit * query2.First().CurrentCourse;
+            decimal initialAmountUnit = dataCurrent.First().InitialInvest / dataCurrentCourse.First().InitialCourse;
+            decimal newCurrentMoney = initialAmountUnit * dataCurrentCourse.First().CurrentCourse;
 
-            if (query.First().InitialInvest > newCurrentMoney)
+            if (dataCurrent.First().InitialInvest > newCurrentMoney)
             {
-                percentProfit = ((newCurrentMoney / query.First().InitialInvest) - 1) * 100;
+                percentProfit = ((newCurrentMoney / dataCurrent.First().InitialInvest) - 1) * 100;
             }
-            else if (Convert.ToDecimal(query.First().InitialInvest) < newCurrentMoney)
+            else if (Convert.ToDecimal(dataCurrent.First().InitialInvest) < newCurrentMoney)
             {
-                percentProfit = (1 - (Convert.ToDecimal(query.First().InitialInvest) / newCurrentMoney)) * 100;
+                percentProfit = (1 - (Convert.ToDecimal(dataCurrent.First().InitialInvest) / newCurrentMoney)) * 100;
             }
             else
                 percentProfit = 0;
 
-            foreach (CurrentDB u in query)
+            foreach (CurrentDB u in dataCurrent)
             {
                 u.PercentProfit = percentProfit;
                 u.CurrentMoney = newCurrentMoney;
@@ -127,14 +125,14 @@ namespace Course_Project.Models_2
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            var query = from u in dataBase.CurrentDBs
+            var dataCurrent = from u in dataBase.CurrentDBs
                         where u.Id_Account == User.Id
                         select u;
-            if (query.Any() != true)
+            if (dataCurrent.Any() != true)
                 return;
-            if (query.First().DateCloseInvest <= DateTime.Now)
+            if (dataCurrent.First().DateCloseInvest <= DateTime.Now)
             {
-                Withdraw(query);
+                Withdraw(dataCurrent);
                 MessageBox.Show("У одной из ваших инвестиций кончился срок вложения!");
             }
         }     
@@ -142,12 +140,12 @@ namespace Course_Project.Models_2
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            var query = from u in dataBase.CurrentDBs
+            var dataCurrent = from u in dataBase.CurrentDBs
                         where u.Id_Operation == Convert.ToInt32(textBox1.Text)
                         select u;
-            if (query.Any() == true)
+            if (dataCurrent.Any() == true)
             {
-                Withdraw(query);
+                Withdraw(dataCurrent);
                 MessageBox.Show("Деньги успешно выведены!");
             }
             else
@@ -158,16 +156,16 @@ namespace Course_Project.Models_2
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            var query = from u in dataBase.CurrentDBs
+            var dataCurrent = from u in dataBase.CurrentDBs
                         where u.Id_Operation == Convert.ToInt32(textBox2.Text)
                         select u;
             if (DateTime.Parse(dateTimePicker1.Text) <= DateTime.Now)
             {
                 MessageBox.Show("Неправильно введена дата!");
             }
-            else if (query.Any() == true)
+            else if (dataCurrent.Any() == true)
             {
-                foreach (CurrentDB u in query)
+                foreach (CurrentDB u in dataCurrent)
                 { u.DateCloseInvest = DateTime.Parse(dateTimePicker1.Text);  }
                 dataBase.Db.SubmitChanges();
                 MessageBox.Show("Срок вложения успешно изменен!");
@@ -228,10 +226,10 @@ namespace Course_Project.Models_2
                     decimal costInvest = Convert.ToDecimal(textBox1.Text);
                     DateTime dateCloseInvest = Convert.ToDateTime(dateTimePicker1.Text);
                     User.MoneyCount -= costInvest;
-                    var query = from u in dataBase.MoneyCountDBs
+                    var dataMoneyCount = from u in dataBase.MoneyCountDBs
                                 where u.Id_Account == User.Id
                                 select u;
-                    foreach (MoneyCountDB u in query)
+                    foreach (MoneyCountDB u in dataMoneyCount)
                     { u.MoneyCount = User.MoneyCount; }
                     CurrentDB currentDB = new CurrentDB
                     {

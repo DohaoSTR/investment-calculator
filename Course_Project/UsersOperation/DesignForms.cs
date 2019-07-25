@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Course_Project.Models
 {
-    class DesignForms
+    static class DesignForms
     {
         public static void Button_MouseMove(object sender, MouseEventArgs e)
         {

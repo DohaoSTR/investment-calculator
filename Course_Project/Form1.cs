@@ -14,7 +14,7 @@ namespace Course_Project
         }
         private void Button1_Click(object sender, EventArgs e)
         {
-            User user = new User();
+            User user = new User();           
             user.Authorization(textBox1,textBox2, this);
         }
         private void Button2_Click(object sender, EventArgs e)

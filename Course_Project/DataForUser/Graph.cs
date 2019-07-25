@@ -78,7 +78,7 @@ namespace Course_Project.Models
             {
                 DateTime dateTime = new DateTime(1970, 1, 1).AddSeconds(Convert.ToInt32(match.Groups[1].Value));
                 ListTimeCourse.Add(dateTime);
-                CurrentCourse = Convert.ToDecimal(match.Groups[2].Value.Replace(".", ",")); // * TakeData("USD");
+                CurrentCourse = Convert.ToDecimal(match.Groups[2].Value.Replace(".", ","));
                 ListCourse.Add(Convert.ToDouble(CurrentCourse));
             }
             return CurrentCourse;
