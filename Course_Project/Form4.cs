@@ -18,10 +18,26 @@ namespace Course_Project
         }
         private void InitTables()
         {
-            DataBase dataBase = new DataBase();
-            dataBase.ConnectionString();
-            dataGridView1.DataSource = dataBase.CurrentDBs.Where(x => x.Id_Account == User.Id).Select(x => x);
-            dataGridView2.DataSource = dataBase.CompletedDBs.Where(x => x.Id_Account == User.Id).Select(x => x);
+            string connectionString = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + @"\KursBase.mdf;Integrated Security=True;Connect Timeout=30;User Instance=False;MultipleActiveResultSets=True";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand sqlCommand1 = new SqlCommand("SELECT * FROM CurrentInvestment WHERE Id_Account = @Id_Account", connection);
+            sqlCommand1.Parameters.AddWithValue("Id_Account", User.Id);
+            SqlDataAdapter adapter1 = new SqlDataAdapter(sqlCommand1);
+
+            SqlCommand sqlCommand2 = new SqlCommand("SELECT * FROM CompletedInvestment WHERE Id_Account = @Id_Account", connection);
+            sqlCommand2.Parameters.AddWithValue("Id_Account", User.Id);
+            SqlDataAdapter adapter2 = new SqlDataAdapter(sqlCommand2);
+
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+
+            adapter1.Fill(dt1);
+            adapter2.Fill(dt2);
+
+            dataGridView1.DataSource = dt1;
+            dataGridView2.DataSource = dt2;
+            connection.Close();
         }                 
         private void Form4_Load(object sender, EventArgs e)
         {
