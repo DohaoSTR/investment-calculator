@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Course_Project.Models;
 using Course_Project.Models_2;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Course_Project
 {
@@ -19,17 +20,8 @@ namespace Course_Project
         {
             DataBase dataBase = new DataBase();
             dataBase.ConnectionString();
-            
-            var query = from u in dataBase.CurrentDBs
-                        select u;
-            if (query.Any() == true)
-                dataGridView1.DataSource = query;
-
-            var query1 = from u in dataBase.CompletedDBs
-                        where u.Id_Account == User.Id
-                        select u;
-            if (query1.Any() == true)
-                dataGridView2.DataSource = query1;
+            dataGridView1.DataSource = dataBase.CurrentDBs.Where(x => x.Id_Account == User.Id).Select(x => x);
+            dataGridView2.DataSource = dataBase.CompletedDBs.Where(x => x.Id_Account == User.Id).Select(x => x);
         }                 
         private void Form4_Load(object sender, EventArgs e)
         {

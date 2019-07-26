@@ -293,8 +293,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.ClientSize = new System.Drawing.Size(1525, 507);
+            this.ClientSize = new System.Drawing.Size(1386, 507);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dateTimePicker1);
@@ -328,13 +329,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idOperationDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameInvestDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn initialInvestDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profitMoneyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOpenInvestDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateCloseInvestDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn percentProfitDataGridViewTextBoxColumn1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
@@ -343,13 +337,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idOperationDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameInvestDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn initialInvestDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn currentMoneyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOpenInvestDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateCloseInvestDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn percentProfitDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
     }
